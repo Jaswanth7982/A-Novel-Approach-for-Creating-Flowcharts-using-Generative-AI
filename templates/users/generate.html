@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Flowchart Generator</title>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#f4f6f8;
+            padding:40px;
+        }
+        textarea{
+            width:100%;
+            height:220px;
+            padding:10px;
+            font-size:16px;
+        }
+        button{
+            background:#007bff;
+            color:white;
+            padding:10px 20px;
+            border:none;
+            font-size:16px;
+            border-radius:6px;
+            cursor:pointer;
+        }
+        .box{
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>AI-Powered Flowchart Generator</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <textarea name="description" placeholder="Write your process steps here...">{{ user_text }}</textarea>
+    <br><br>
+
+    <button type="submit">Generate Flowchart</button>
+</form>
+
+<br><br>
+
+{% if mermaid_code %}
+<h3>Generated Flowchart:</h3>
+
+<div class="mermaid">
+{{ mermaid_code|safe }}
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
